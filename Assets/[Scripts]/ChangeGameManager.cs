@@ -8,13 +8,12 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
 {
 
     public GameObject _3D;
-    public GameObject[] _2D;
-
     public GameObject player;
+
     bool change;
     public bool is3D = true;
-    public bool isWeapon = false;
-    public bool isShield = false;
+    public bool isWeapon = true;
+    public bool isShield = true;
     public int swordDurability = 100;
     public int shieldDurability = 100;
     public int health = 100;
@@ -26,8 +25,8 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
     void Start()
     {
         _3D.gameObject.SetActive(true);
-        for (int i = 0; i < _2D.Length; i++)
-        { _2D[i].gameObject.SetActive(false); }
+        /*for (int i = 0; i < _2D.Length; i++)
+        { _2D[i].gameObject.SetActive(false); }*/
         healthBar.value = health;
         change = true;
     }
@@ -76,15 +75,14 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
     public void ChangeGame(int index)
     {
 
-        is3D = false;
-        _2D[index].gameObject.SetActive(true);
-        _3D.gameObject.SetActive(false);
+        is3D = true;
+        
+        _3D.gameObject.SetActive(true);
     }
 
     public void ChangeGame3D(int index)
     {
-        is3D = true;
-        _2D[index].gameObject.SetActive(false);
+        is3D = true;       
         _3D.gameObject.SetActive(true);
     }
 

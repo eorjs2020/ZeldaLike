@@ -249,13 +249,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _3D: {fileID: 1199710640}
-  _2D:
-  - {fileID: 0}
-  - {fileID: 0}
   player: {fileID: 0}
   is3D: 1
-  isWeapon: 0
-  isShield: 0
+  isWeapon: 1
+  isShield: 1
   swordDurability: 100
   shieldDurability: 100
   health: 100
@@ -5996,15 +5993,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1378490302838637975, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.14521313
+      value: 0.14521314
       objectReference: {fileID: 0}
     - target: {fileID: 1378490302838637975, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000032966824
+      value: 1.6271901e-15
       objectReference: {fileID: 0}
     - target: {fileID: 1378490302838637975, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.000000004838501
+      value: -2.6894993e-16
       objectReference: {fileID: 0}
     - target: {fileID: 2737168727309989603, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_ChildCameras.Array.size
@@ -6060,31 +6057,51 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6094594677565995466, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000042727213
+      value: -0.0000000037002852
       objectReference: {fileID: 0}
     - target: {fileID: 6094594677565995466, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 4.975684e-10
+      value: 4.3090687e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094594677618962026, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.0000000037190342
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094594677618962026, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -2.1581587e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6094594678627791078, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.0000000064215673
+      value: -0.0000000058480154
       objectReference: {fileID: 0}
     - target: {fileID: 6094594678627791078, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 6.299597e-10
+      value: 5.7369387e-10
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094594679065411400, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.99983466
+      objectReference: {fileID: 0}
+    - target: {fileID: 6094594679065411400, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.01818949
       objectReference: {fileID: 0}
     - target: {fileID: 6094594679065411400, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.000000008525928
+      value: 5.711298e-10
       objectReference: {fileID: 0}
     - target: {fileID: 6094594679065411400, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.0000000011504093
+      value: -7.706295e-11
       objectReference: {fileID: 0}
     - target: {fileID: 6989325752956320586, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: <isSword>k__BackingField
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989325752956320586, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: <isShield>k__BackingField
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6989325752956320586, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: <JumpForce>k__BackingField
@@ -6098,9 +6115,17 @@ PrefabInstance:
       propertyPath: <RotationDamping>k__BackingField
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 6989325752956320586, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: <swordDurability>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989325752956320586, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
+      propertyPath: <shieldDurability>k__BackingField
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8593713599580120430, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.763024e-14
+      value: -1.6400547e-14
       objectReference: {fileID: 0}
     - target: {fileID: 8593713599580120430, guid: 0b23001cf16648247959fbaffdc1bf13, type: 3}
       propertyPath: m_LocalPosition.y
