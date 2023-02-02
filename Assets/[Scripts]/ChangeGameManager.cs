@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using Cinemachine;
 using UnityEngine.SceneManagement;
 
 public class ChangeGameManager : Singleton<ChangeGameManager>
@@ -69,13 +70,16 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
     public void IventoryOpen()
     {
         inventroyOn = true;
+        var Cam = GameObject.Find("FreeLookCamera").GetComponent<Cinemachine.CinemachineInputProvider>();
+        Cam.enabled = false;
         inventroy.SetActive(true);        
     }
 
     public void IventoryClose()
     {
         inventroyOn = false;
-
+        var Cam = GameObject.Find("FreeLookCamera").GetComponent<Cinemachine.CinemachineInputProvider>();
+        Cam.enabled = true;
         inventroy.SetActive(false);              
     }
 

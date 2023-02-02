@@ -378,7 +378,7 @@ MonoBehaviour:
   recipes: []
   maxItem: 4
   itemNum: 0
-  resultImage: {fileID: 0}
+  resultImage: {fileID: 8784607846573936537}
 --- !u!222 &8784607846858071314
 CanvasRenderer:
   m_ObjectHideFlags: 0
