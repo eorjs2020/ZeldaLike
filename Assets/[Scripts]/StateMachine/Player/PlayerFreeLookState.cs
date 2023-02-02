@@ -95,6 +95,7 @@ public class PlayerFreeLookState : PlayerBaseState
     }
     private void FaceMovementDirection(Vector3 movement, float deltaTime)
     {
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
         stateMachine.transform.rotation = Quaternion.Lerp( 
            stateMachine.transform.rotation, 
            Quaternion.LookRotation(movement),

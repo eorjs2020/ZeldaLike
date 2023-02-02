@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -9,7 +10,7 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
 
     public GameObject _3D;
     public GameObject player;
-
+    public GameObject inventroy;
     bool change;
     public bool is3D = true;
     public bool isWeapon = true;
@@ -21,6 +22,7 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
 
     public bool isGamePaused = false;
     public GameObject PauseUI;
+    public bool inventroyOn = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -39,6 +41,11 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
             SceneManager.LoadScene("End");
         }
 
+        if(Input.GetKeyDown(KeyCode.I))
+        {
+            IventoryOpen();           
+        }
+
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(isGamePaused)
@@ -54,9 +61,21 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
 
     public void Resume()
     {
-        PauseUI.SetActive(false);
+        inventroy.SetActive(false);
         Time.timeScale = 1;
         isGamePaused = false;
+    }
+
+    public void IventoryOpen()
+    {
+        inventroyOn = true;
+        inventroy.SetActive(true);        
+    }
+
+    public void IventoryClose()
+    {
+        inventroyOn = false;
+        PauseUI.SetActive(false);              
     }
 
     public void Pause()

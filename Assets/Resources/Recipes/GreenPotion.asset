@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c45b3d17ff5e42247a33c983fbb19b69, type: 3}
+  m_Name: GreenPotion
+  m_EditorClassIdentifier: 
+  ingredients:
+  - {fileID: 11400000, guid: 78943ffd210465049bf5bf8c71af4234, type: 2}
+  - {fileID: 11400000, guid: 78943ffd210465049bf5bf8c71af4234, type: 2}
+  - {fileID: 11400000, guid: 78943ffd210465049bf5bf8c71af4234, type: 2}
+  - {fileID: 11400000, guid: e60bc6e2dc06bd64499d18c51e69720e, type: 2}
+  result: {fileID: 11400000, guid: 9b4e1377db22cdc41b8a099d0df1252a, type: 2}
