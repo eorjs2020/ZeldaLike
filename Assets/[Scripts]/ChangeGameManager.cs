@@ -75,7 +75,8 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
     public void IventoryClose()
     {
         inventroyOn = false;
-        PauseUI.SetActive(false);              
+
+        inventroy.SetActive(false);              
     }
 
     public void Pause()
