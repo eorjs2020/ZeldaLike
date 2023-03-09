@@ -34,20 +34,22 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        if(!context.performed || ChangeGameManager.Instance.inventroyOn) { return; }        
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
+        if (!context.performed) { return; }        
         JumpEvent?.Invoke();
     }
 
     public void OnDodge(InputAction.CallbackContext context)
     {
-        if (!context.performed && ChangeGameManager.Instance.inventroyOn) { return; }
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
+        if (!context.performed) { return; }
 
         DodgeEvent?.Invoke();
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        if (!context.performed || ChangeGameManager.Instance.inventroyOn) { return; }
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
         MovementValue = context.ReadValue<Vector2>();
     }
 
@@ -58,21 +60,23 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnTarget(InputAction.CallbackContext context)
     {
-       if(!context.performed || ChangeGameManager.Instance.inventroyOn) { return; }
+        if (!context.performed) { return; }
 
         TargetEvent?.Invoke();
     }
 
     public void OnCancel(InputAction.CallbackContext context)
     {
-        if (!context.performed || ChangeGameManager.Instance.inventroyOn) { return; }
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
+        if (!context.performed) { return; }
 
         CancelEvent?.Invoke();
     }
 
     public void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed || ChangeGameManager.Instance.inventroyOn)
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
+        if (!context.performed)
         {            
             IsDash = true;
         }
@@ -84,8 +88,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnAttack(InputAction.CallbackContext context)
     {
-        
-        if (context.performed || ChangeGameManager.Instance.inventroyOn)
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
+        if (context.performed)
         {
             IsAttacking = true;
         }
@@ -97,7 +101,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnBlock(InputAction.CallbackContext context)
     {
-        if (context.performed || ChangeGameManager.Instance.inventroyOn)
+        if(ChangeGameManager.Instance.inventroyOn) { return; }
+        if (context.performed)
         {
             IsBlocking = true;
         }
@@ -109,7 +114,8 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
     public void OnInteract(InputAction.CallbackContext context)
     {
-        if (!context.performed || ChangeGameManager.Instance.inventroyOn) { return; }
+        if (ChangeGameManager.Instance.inventroyOn) { return; }
+        if (!context.performed) { return; }
     }
 
     private void OnTriggerEnter(Collider other)

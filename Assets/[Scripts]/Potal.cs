@@ -15,20 +15,23 @@ public class Potal : MonoBehaviour
     {
         if (other.gameObject.layer == 6)
         {
-            int pHealth = 0;
-            pHealth = other.GetComponentInChildren<Health>().health;
+            Debug.Log(other.name);
+            other.GetComponent<CharacterController>().enabled = false;
+            other.transform.position = exit.transform.position;
+            other.GetComponent<CharacterController>().enabled = true;
+            /*pHealth = other.GetComponentInChildren<Health>().health;
             Destroy(other.GetComponentInParent<Player>().gameObject);
             var P = Instantiate(player, exit.position, Quaternion.identity);
             P.GetComponentInChildren<Health>().health = pHealth;
-            P.transform.parent = d.transform;
+            P.transform.parent = d.transform;*/
             //player.GetComponentInChildren<Health>().health = 100;
             //GameObject.FindObjectsOfType<EnemyStateMachine>();
-            foreach (EnemyStateMachine go in GameObject.FindObjectsOfType(typeof(EnemyStateMachine)))
+            /*foreach (EnemyStateMachine go in GameObject.FindObjectsOfType(typeof(EnemyStateMachine)))
             {
                 go.FindPlayer();
             }
             _gameManager.ChangeGame(StageIndex);
-            Destroy(this.gameObject);
+            Destroy(this.gameObject);*/
         }
     }
 

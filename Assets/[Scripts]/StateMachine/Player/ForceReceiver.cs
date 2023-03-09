@@ -25,7 +25,7 @@ public class ForceReceiver : MonoBehaviour
     {
         if (verticalVelocity < 0f && controller.isGrounded)
         {
-            verticalVelocity = Physics.gravity.y * Time.deltaTime;
+            verticalVelocity = 0;
         }
         else
         {
@@ -45,6 +45,13 @@ public class ForceReceiver : MonoBehaviour
         }
         
     }
+
+    public void Reset()
+    {
+        impact = Vector3.zero;
+        verticalVelocity = 0f;
+    }
+
 
     public void AddForce(Vector3 force)
     {

@@ -4,26 +4,21 @@ using UnityEngine;
 
 public class PlayerTargetingState : PlayerBaseState
 {
-    public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine) { }
-
-    private Vector2 dodgingDirectionInput;
-
-    private float remaningDodgeTime;
-    private readonly int TargeingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
-    private readonly int TargeingForwardSpeedHash = Animator.StringToHash("TargetingFoward");
+    private readonly int TargetingBlendTreeHash = Animator.StringToHash("TargetingBlendTree");
+    private readonly int TargetingForwardHash = Animator.StringToHash("TargetingForward");
+    private readonly int TargetingRightHash = Animator.StringToHash("TargetingRight");
 
     private const float CrossFadeDuration = 0.1f;
 
+    public PlayerTargetingState(PlayerStateMachine stateMachine) : base(stateMachine) { }
+
     public override void Enter()
     {
-        stateMachine.InputReader.CancelEvent += OnCancel;
-
+        stateMachine.InputReader.TargetEvent += OnTarget;
         stateMachine.InputReader.DodgeEvent += OnDodge;
-
         stateMachine.InputReader.JumpEvent += OnJump;
 
-        stateMachine.Animator.CrossFadeInFixedTime(TargeingBlendTreeHash, CrossFadeDuration);
-        
+        stateMachine.Animator.CrossFadeInFixedTime(TargetingBlendTreeHash, CrossFadeDuration);
     }
 
     public override void Tick(float deltaTime)
@@ -33,7 +28,7 @@ public class PlayerTargetingState : PlayerBaseState
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
             return;
         }
-        if(stateMachine.InputReader.IsBlocking && stateMachine.isShield)
+        if (stateMachine.InputReader.IsBlocking)
         {
             stateMachine.SwitchState(new PlayerBlockingState(stateMachine));
             return;
@@ -46,17 +41,32 @@ public class PlayerTargetingState : PlayerBaseState
 
         Vector3 movement = CalculateMovement(deltaTime);
 
-        if (stateMachine.InputReader.IsDash)
-        {
-            Move(movement * stateMachine.FreeLookDashMovementSpeed, deltaTime);            
-        }
-        else
-        {
-            Move(movement * stateMachine.TragetingMovementSpeed, deltaTime);
-        }
-        UpdateAnimator(deltaTime);
-        FaceTarget();
+        Move(movement * stateMachine.TargetingMovementSpeed, deltaTime);
 
+        UpdateAnimator(deltaTime);
+
+        FaceTarget();
+    }
+
+    public override void Exit()
+    {
+        stateMachine.InputReader.TargetEvent -= OnTarget;
+        stateMachine.InputReader.DodgeEvent -= OnDodge;
+        stateMachine.InputReader.JumpEvent -= OnJump;
+    }
+
+    private void OnTarget()
+    {
+        stateMachine.Targeter.Cancel();
+
+        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
+    }
+
+    private void OnDodge()
+    {
+        if (stateMachine.InputReader.MovementValue == Vector2.zero) { return; }
+
+        stateMachine.SwitchState(new PlayerDodgingState(stateMachine, stateMachine.InputReader.MovementValue));
     }
 
     private void OnJump()
@@ -64,62 +74,36 @@ public class PlayerTargetingState : PlayerBaseState
         stateMachine.SwitchState(new PlayerJumpState(stateMachine));
     }
 
-    public override void Exit()
-    {
-        stateMachine.InputReader.CancelEvent -= OnCancel;
-        stateMachine.InputReader.DodgeEvent -= OnDodge;
-        stateMachine.InputReader.JumpEvent -= OnJump;
-    }
-
-    private void OnCancel()
-    {
-        stateMachine.Targeter.Cancel();
-
-        stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
-
-    }
-
     private Vector3 CalculateMovement(float deltaTime)
     {
         Vector3 movement = new Vector3();
-        
-        if(remaningDodgeTime > 0f)
-        {
-            movement += stateMachine.transform.right * dodgingDirectionInput.x * stateMachine.DodgeLength / stateMachine.DodgeDuration;
-            movement += stateMachine.transform.forward * dodgingDirectionInput.y * stateMachine.DodgeLength / stateMachine.DodgeDuration;
 
-            remaningDodgeTime = Mathf.Max(remaningDodgeTime - deltaTime, 0f);
-
-            
-        }
-        else
-        {
-            movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
-            movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
-        }        
+        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
+        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
 
         return movement;
     }
 
-    private void OnDodge()
-    {
-        if(Time.time - stateMachine.PreviousDodgeTime < stateMachine.DodgeCooldown) { return; }
-
-        stateMachine.SetDodgeTime(Time.time);
-        dodgingDirectionInput = stateMachine.InputReader.MovementValue;
-        remaningDodgeTime = stateMachine.DodgeDuration;
-    }
-
     private void UpdateAnimator(float deltaTime)
     {
-        if (stateMachine.InputReader.MovementValue == Vector2.zero)
+        if (stateMachine.InputReader.MovementValue.y == 0)
         {
-            stateMachine.Animator.SetFloat(TargeingForwardSpeedHash, 0, 0.1f, deltaTime);
-            return;
+            stateMachine.Animator.SetFloat(TargetingForwardHash, 0, 0.1f, deltaTime);
         }
-        if(stateMachine.InputReader.IsDash)
-            stateMachine.Animator.SetFloat(TargeingForwardSpeedHash, 1.0f, 0.1f, deltaTime);
         else
-            stateMachine.Animator.SetFloat(TargeingForwardSpeedHash, 0.5f, 0.1f, deltaTime);
+        {
+            float value = stateMachine.InputReader.MovementValue.y > 0 ? 1f : -1f;
+            stateMachine.Animator.SetFloat(TargetingForwardHash, value, 0.1f, deltaTime);
+        }
+
+        if (stateMachine.InputReader.MovementValue.x == 0)
+        {
+            stateMachine.Animator.SetFloat(TargetingRightHash, 0, 0.1f, deltaTime);
+        }
+        else
+        {
+            float value = stateMachine.InputReader.MovementValue.x > 0 ? 1f : -1f;
+            stateMachine.Animator.SetFloat(TargetingRightHash, value, 0.1f, deltaTime);
+        }
     }
 }

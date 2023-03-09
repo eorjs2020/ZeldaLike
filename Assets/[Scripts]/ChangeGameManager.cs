@@ -62,7 +62,7 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
 
     public void Resume()
     {
-        inventroy.SetActive(false);
+        PauseUI.SetActive(false);
         Time.timeScale = 1;
         isGamePaused = false;
     }

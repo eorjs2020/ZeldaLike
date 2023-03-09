@@ -27,6 +27,8 @@ public class WeaponDamage : MonoBehaviour
 
         if (other.TryGetComponent<Health>(out Health health))
         {
+            Debug.Log("Damaged");
+            Debug.Log(other.name);
             health.DealDamage(damage);
         }
 

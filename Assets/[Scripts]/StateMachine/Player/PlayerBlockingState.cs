@@ -20,6 +20,7 @@ public class PlayerBlockingState : PlayerBaseState
 
     public override void Tick(float deltaTime)
     {
+        Move(deltaTime);
         if (stateMachine.InputReader.IsAttacking)
         {
             stateMachine.SwitchState(new PlayerAttackingState(stateMachine, 0));
@@ -35,29 +36,17 @@ public class PlayerBlockingState : PlayerBaseState
             stateMachine.SwitchState(new PlayerFreeLookState(stateMachine));
             return;
         }
-        Vector3 movement = CalculateMovement();
-
-        Move(movement * stateMachine.TragetingMovementSpeed, deltaTime);        
-        UpdateAnimator(deltaTime);
+              
+        
         FaceTarget();
     }
 
     public override void Exit()
     {
         stateMachine.Health.SetInvunerable(false);
-    }
+    }   
 
-    private Vector3 CalculateMovement()
-    {
-        Vector3 movement = new Vector3();
-
-        movement += stateMachine.transform.right * stateMachine.InputReader.MovementValue.x;
-        movement += stateMachine.transform.forward * stateMachine.InputReader.MovementValue.y;
-
-        return movement;
-    }
-
-    private void UpdateAnimator(float deltaTime)
+    /*private void UpdateAnimator(float deltaTime)
     {
         if (stateMachine.InputReader.MovementValue == Vector2.zero)
         {
@@ -66,5 +55,5 @@ public class PlayerBlockingState : PlayerBaseState
         }
         stateMachine.Animator.SetFloat(BlockingSpeedHash, 1.0f, 0.1f, deltaTime);
         
-    }
+    }*/
 }
