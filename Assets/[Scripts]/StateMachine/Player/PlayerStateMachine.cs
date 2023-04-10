@@ -21,8 +21,9 @@ public class PlayerStateMachine : StateMachine
     [field: SerializeField] public float DodgeLength { get; private set; }
     [field: SerializeField] public float JumpForce { get; private set; }
     [field: SerializeField] public Attack[] Attacks { get; private set; }
-
-
+    [field: SerializeField] public bool isInteract;
+    [field: SerializeField] public GameObject StateDrivenCam;
+    [field: SerializeField] public GameObject CookingCam;
     public float PreviousDodgeTime { get; private set; } = Mathf.NegativeInfinity;
 
     public Transform MainCameraTransform  { get; private set; }
@@ -60,5 +61,16 @@ public class PlayerStateMachine : StateMachine
     public void SetDodgeTime(float dodgeTime)
     {
         PreviousDodgeTime = dodgeTime;
+    }
+
+    public void Cooking()
+    {
+        CookingCam.SetActive(true);
+        StateDrivenCam.SetActive(false);        
+    }
+    public void CookingEnd()
+    {
+        StateDrivenCam.SetActive(true);
+        CookingCam.SetActive(false);
     }
 }

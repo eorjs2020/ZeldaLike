@@ -42,10 +42,7 @@ public class CookingPot : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyUp(KeyCode.E))
-        {
-            Cooking();
-        }
+        
     }
 
     public void Cooking()

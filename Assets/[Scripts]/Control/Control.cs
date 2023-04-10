@@ -374,11 +374,11 @@ public partial class @Controls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""f7a6970c-7591-4580-9029-6da2dfa2da30"",
-                    ""path"": """",
+                    ""id"": ""5488d065-50b9-4a1e-b904-6a82301ccc2f"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""Mouse & Keyboard"",
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false

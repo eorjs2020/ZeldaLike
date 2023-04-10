@@ -42,11 +42,6 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
             SceneManager.LoadScene("End");
         }
 
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            IventoryOpen();           
-        }
-
         if(Input.GetKeyDown(KeyCode.Escape))
         {
             if(isGamePaused)
@@ -70,16 +65,18 @@ public class ChangeGameManager : Singleton<ChangeGameManager>
     public void IventoryOpen()
     {
         inventroyOn = true;
-        var Cam = GameObject.Find("FreeLookCamera").GetComponent<Cinemachine.CinemachineInputProvider>();
-        Cam.enabled = false;
+        PlayerStateMachine player = GameObject.Find("Player").GetComponent<PlayerStateMachine>();
+        player.Cooking();
+        player.SwitchState(new PlayerCookingState(player));
         inventroy.SetActive(true);        
     }
 
     public void IventoryClose()
     {
         inventroyOn = false;
-        var Cam = GameObject.Find("FreeLookCamera").GetComponent<Cinemachine.CinemachineInputProvider>();
-        Cam.enabled = true;
+        PlayerStateMachine player = GameObject.Find("Player").GetComponent<PlayerStateMachine>();
+        player.CookingEnd();
+        player.SwitchState(new PlayerFreeLookState(player));        
         inventroy.SetActive(false);              
     }
 

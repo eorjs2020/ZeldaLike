@@ -44,16 +44,5 @@ public class PlayerBlockingState : PlayerBaseState
     public override void Exit()
     {
         stateMachine.Health.SetInvunerable(false);
-    }   
-
-    /*private void UpdateAnimator(float deltaTime)
-    {
-        if (stateMachine.InputReader.MovementValue == Vector2.zero)
-        {
-            stateMachine.Animator.SetFloat(BlockingSpeedHash, 0, 0.1f, deltaTime);
-            return;
-        }
-        stateMachine.Animator.SetFloat(BlockingSpeedHash, 1.0f, 0.1f, deltaTime);
-        
-    }*/
+    }     
 }

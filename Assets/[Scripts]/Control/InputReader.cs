@@ -46,7 +46,7 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
 
         DodgeEvent?.Invoke();
     }
-
+    
     public void OnMove(InputAction.CallbackContext context)
     {
         if (ChangeGameManager.Instance.inventroyOn) { return; }
@@ -116,6 +116,17 @@ public class InputReader : MonoBehaviour, Controls.IPlayerActions
     {
         if (ChangeGameManager.Instance.inventroyOn) { return; }
         if (!context.performed) { return; }
+        float interactRange = 2f;
+        Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
+        foreach (Collider collider in colliderArray)
+        {
+            if(collider.TryGetComponent(out Interact interact))
+            {
+                interact.Interaction();
+            }
+            
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)

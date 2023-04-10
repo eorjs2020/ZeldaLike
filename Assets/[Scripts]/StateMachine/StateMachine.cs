@@ -9,7 +9,7 @@ public abstract class StateMachine : MonoBehaviour
     // Start is called before the first frame update
     public void SwitchState(State newState)
     {
-        gameManager = GameObject.FindObjectOfType<ChangeGameManager>();
+//gameManager = GameObject.FindObjectOfType<ChangeGameManager>();
         currentState?.Exit();
         currentState = newState;
         currentState?.Enter();
@@ -18,8 +18,6 @@ public abstract class StateMachine : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        if (gameManager.is3D)
-            currentState?.Tick(Time.deltaTime);
+       currentState?.Tick(Time.deltaTime);
     }
 }
